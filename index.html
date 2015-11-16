@@ -1,0 +1,44 @@
+<html ng-app="myApp">
+	<head>
+		<title></title>
+		<!-- AngularJS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+		<!-- Firebase -->
+		<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="testController">
+			<form name="todoForm" ng-submit="addTodo()">
+				<input type="text" name="newTodo" ng-model="newTodo" required>
+				<button type="submit" ng-disabled="todoForm.$invalid">Add</button>
+			</form>
+			<ul>
+				<li ng-repeat="d in data">
+					{{d.title}}	
+					<button ng-click="remove(d)">x</button>
+				</li>
+			</ul>		
+	
+
+		</div>
+	</body>
+	<script>
+		var myApp = angular.module('myApp',['firebase']);
+
+		myApp.controller('testController',function($scope,$firebaseArray){
+			var fRef = new Firebase('https://dontodo.firebaseio.com/');
+			$scope.data = $firebaseArray(fRef);
+			$scope.addTodo = function(){
+
+				$scope.data.$add({'title':$scope.newTodo,'done':false});
+				$scope.newTodo = '';
+			}
+			$scope.remove = function(d){
+				$scope.data.$remove(d)
+			}
+			console.log($scope);
+		});
+	</script>
+</html>
