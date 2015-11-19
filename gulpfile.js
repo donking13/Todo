@@ -20,20 +20,32 @@ var desc_js = 'public/js',
 	src_sass = 'app/sass/**/*.scss';
 
 
+/*error handler*/
+
+var onError = function(err){
+	console.log(err);
+	this.emit('end');
+}
+
 /*SCSS to CSS*/
 
 gulp.task('sass',function(){
-	gulp.src(src_sass)
-		.pipe(plumber())
+	return gulp.src(src_sass)
+		.pipe(plumber({
+			errorHandler:onError
+		}))
 		.pipe(sass())
+		.pipe(autoprefixer('last 2 versions'))
 		.pipe(gulp.dest(desc_css))
 		.pipe(minifyCss())
+		.pipe(sourcemaps.init())
+		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(desc_css));
 });
 
 /*html*/
 gulp.task('html',function(){
-	gulp.src(src_html)
+	return gulp.src(src_html)
 		.pipe(gulp.dest(desc_html));
 
 });

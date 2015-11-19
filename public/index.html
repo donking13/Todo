@@ -8,17 +8,40 @@
 	</head>
 	<body>
 		<main class="container">
-			<h1>Angular + Firebase Todo App</h1>
+			<h1 class="text-center">Angular + Firebase Todo App</h1>
 			<div ng-controller="testController">
-				<form name="todoForm" ng-submit="addTodo()">
+				<form class="text-center" name="todoForm" ng-submit="addTodo()">
 					<input type="text" name="newTodo" ng-model="newTodo" required>
 					<button type="submit" class="btn btn-primary" ng-disabled="todoForm.$invalid">Add</button>
 				</form>
 				<ul class="list-group">
-					<li class="list-group-item clearfix" ng-repeat="d in data">
+					<h2>Pending List</h2>
+					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'pending'}">
 						<div class="col-sm-9">{{d.title}}</div>
-						<div class="col-sm-3 text-right"><button class="btn btn-danger" ng-click="remove(d)">x</button></div>
-						
+						<div class="col-sm-3 text-right">
+							<button class="btn btn-warning" ng-click="start(d)">start</button>
+							<button class="btn btn-danger" ng-click="remove(d)">x</button>
+						</div>
+					</li>
+				</ul>
+				<ul class="list-group">
+					<h2>In Progress List</h2>
+					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'in progress'}">
+						<div class="col-sm-9">{{d.title}}</div>
+						<div class="col-sm-3 text-right">
+							<button class="btn btn-success" ng-click="complete(d)">done</button>
+							<button class="btn btn-danger" ng-click="remove(d)">x</button>
+						</div>
+					</li>
+				</ul>
+				<ul class="list-group">
+					<h2>Completed</h2>
+					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'complete'}">
+						<div class="col-sm-9">{{d.title}}</div>
+						<div class="col-sm-3 text-right">
+							<button class="btn btn-warning" ng-click="start(d)">restart</button>
+							<button class="btn btn-danger" ng-click="remove(d)">x</button>
+						</div>
 					</li>
 				</ul>	
 			</div>	
