@@ -48,5 +48,49 @@
 
 			console.log($scope);
 		});
-		console.log('hello!!!!');
+		
+
+		myApp.controller('authenController',function($scope,$firebaseAuth,$location){
+			var fRef = new Firebase('https://dontodo.firebaseio.com/');
+			$scope.authObj = $firebaseAuth(fRef);
+
+			$scope.createAccount = function(email,accountPassword){
+				$scope.authObj.$createUser({
+				  email: email,
+				  password: accountPassword
+				}).then(function(userData) {
+				  console.log("User " + userData.uid + " created successfully!");
+				  return $scope.authObj.$authWithPassword({
+				    email: email,
+				    password: accountPassword
+				  });
+				}).then(function(authData) {
+				  console.log("Logged in as:", authData.uid);
+				}).catch(function(error) {
+				  console.error("Error: ", error);
+				});
+				console.log($scope);
+			}
+
+			$scope.login = function(username,password){
+				$scope.authObj.$authWithPassword({
+				  email: username,
+				  password: password
+				}).then(function(authData) {
+				  console.log("Logged in as:", authData.uid);
+				}).catch(function(error) {
+				  console.error("Authentication failed:", error);
+				});
+				console.log($scope);
+			}
+
+			$scope.logout = function(){
+				$scope.authObj.$unauth();
+				//$location.path('/');
+				console.log($scope);
+			}
+			
+
+			
+		});
 
