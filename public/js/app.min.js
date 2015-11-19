@@ -40,6 +40,12 @@
 				d.status = 'complete';
 				$scope.data.$save(d);
 			}
+
+			$scope.tab = 1;
+			$scope.tabOpen = function(tabNo){
+					$scope.tab = tabNo;
+			}
+
 			console.log($scope);
 		});
 		console.log('hello!!!!');

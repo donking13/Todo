@@ -14,7 +14,12 @@
 					<input type="text" name="newTodo" ng-model="newTodo" required>
 					<button type="submit" class="btn btn-primary" ng-disabled="todoForm.$invalid">Add</button>
 				</form>
-				<ul class="list-group">
+				<ul class="list-inline">
+					<li class="btn btn-default" ng-click="tabOpen(1)">Pending</li>
+					<li class="btn btn-default" ng-click="tabOpen(2)">In progress</li>
+					<li class="btn btn-default" ng-click="tabOpen(3)">Completed</li>
+				</ul> 
+				<ul class="list-group" ng-show="tab == 1">
 					<h2>Pending List</h2>
 					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'pending'}">
 						<div class="col-sm-9">{{d.title}}</div>
@@ -24,7 +29,7 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="list-group">
+				<ul class="list-group" ng-show="tab == 2">
 					<h2>In Progress List</h2>
 					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'in progress'}">
 						<div class="col-sm-9">{{d.title}}</div>
@@ -34,7 +39,7 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="list-group">
+				<ul class="list-group" ng-show="tab == 3">
 					<h2>Completed</h2>
 					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'complete'}">
 						<div class="col-sm-9">{{d.title}}</div>
