@@ -50,8 +50,6 @@
 			$scope.userdata = $firebaseArray(uRef);
 
 			$scope.authObj = Auth;
-			//console.log($rootScope);
-			$scope.rootEmail = $rootScope.email;
 
 			$scope.authObj.$onAuth(function(authData){
 				console.log(authData);
@@ -126,13 +124,6 @@
 			/*create account*/
 			$scope.createAccount = function(email,accountPassword){
 				//create id
-				var timeStamp = new Date().valueOf();
-
-				$scope.data.$add({
-					id:timeStamp,
-					name:$scope.fullname,
-					email:$scope.email
-				});
 
 				$scope.authObj.$createUser({
 				  email: email,

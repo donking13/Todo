@@ -1,5 +1,5 @@
-<div>
-	<button class="btn btn-danger" ng-click="logout()">logout</button>
+<div id="todo">
+	<span class="emailDisplay"> {{useremail}} </span><button class="logoutBtn btn btn-danger" ng-click="logout()">logout</button>
 	<form class="text-center" name="todoForm" ng-submit="addTodo()">
 		<input type="text" name="newTodo" ng-model="newTodo" required>
 		<button type="submit" class="btn btn-primary" ng-disabled="todoForm.$invalid">Add</button>
