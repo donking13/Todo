@@ -1,0 +1,34 @@
+<div>
+			<ul class="loginBtns">
+				<li class="btn btn-default" ng-click="tabOpen(1)">Register</li>
+				<li class="btn btn-default" ng-click="tabOpen(2)">Login</li>
+			</ul>
+			<div ng-show="tab == 1" class="text-center">
+				<form method="post" name="createForm">
+					<div>
+						<input type="text" name="fullname" ng-model="fullname" placeholder="what's your name?" required>
+					</div>
+					<div>
+						<input type="email" name="email" ng-model="email" placeholder="what's your email?" required>
+					</div>
+					<div class="">
+						<input type="password" name="accountPassword" ng-model="accountPassword" placeholder="type in your password" required>
+					</div>
+					
+					<button class="btn btn-primary logBtn" type="submit" ng-click="createAccount(email,accountPassword)" ng-disabled="createForm.$invalid">create</button>
+				</form>
+				<div class="label label-danger" ng-show="loginError">{{loginError}}</div>
+			</div>
+			
+			<div ng-show="tab == 2" class="text-center">
+				<form method="post" name="loginForm">
+					<div class="">
+						<input type="email" name="username" ng-model="username" placeholder="type in your email" required>
+					</div>
+					<div><input type="password" name="password" ng-model="password" placeholder="type in your password" required></div>
+					
+					<button class="btn btn-primary logBtn" type="submit" ng-click="login(username,password)" ng-disabled="loginForm.$invalid">login</button>
+				</form> 
+				<div class="label label-danger" ng-show="loginError">{{loginError}}</div>
+			</div>
+</div>

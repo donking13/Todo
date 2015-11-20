@@ -18,15 +18,12 @@ var desc_js = 'public/js',
 	src_js = 'app/scripts/**/*.js',
 	src_html = 'app/**/*.html',
 	src_sass = 'app/sass/**/*.scss';
-
-
 /*error handler*/
 
 var onError = function(err){
 	console.log(err);
 	this.emit('end');
 }
-
 /*SCSS to CSS*/
 
 gulp.task('sass',function(){

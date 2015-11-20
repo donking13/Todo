@@ -8,48 +8,8 @@
 	</head>
 	<body>
 		<main class="container">
-			<h1 class="text-center">Angular + Firebase Todo App</h1>
-			<div ng-controller="testController">
-				<form class="text-center" name="todoForm" ng-submit="addTodo()">
-					<input type="text" name="newTodo" ng-model="newTodo" required>
-					<button type="submit" class="btn btn-primary" ng-disabled="todoForm.$invalid">Add</button>
-				</form>
-				<ul class="list-inline">
-					<li class="btn btn-default" ng-click="tabOpen(1)">Pending</li>
-					<li class="btn btn-default" ng-click="tabOpen(2)">In progress</li>
-					<li class="btn btn-default" ng-click="tabOpen(3)">Completed</li>
-				</ul> 
-				<ul class="list-group" ng-show="tab == 1">
-					<h2>Pending List</h2>
-					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'pending'}">
-						<div class="col-sm-9">{{d.title}}</div>
-						<div class="col-sm-3 text-right">
-							<button class="btn btn-warning" ng-click="start(d)">start</button>
-							<button class="btn btn-danger" ng-click="remove(d)">x</button>
-						</div>
-					</li>
-				</ul>
-				<ul class="list-group" ng-show="tab == 2">
-					<h2>In Progress List</h2>
-					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'in progress'}">
-						<div class="col-sm-9">{{d.title}}</div>
-						<div class="col-sm-3 text-right">
-							<button class="btn btn-success" ng-click="complete(d)">done</button>
-							<button class="btn btn-danger" ng-click="remove(d)">x</button>
-						</div>
-					</li>
-				</ul>
-				<ul class="list-group" ng-show="tab == 3">
-					<h2>Completed</h2>
-					<li class="list-group-item clearfix" ng-repeat="d in data | filter:{status: 'complete'}">
-						<div class="col-sm-9">{{d.title}}</div>
-						<div class="col-sm-3 text-right">
-							<button class="btn btn-warning" ng-click="start(d)">restart</button>
-							<button class="btn btn-danger" ng-click="remove(d)">x</button>
-						</div>
-					</li>
-				</ul>	
-			</div>	
+			<h1 class="text-center mainTitle">Angular + Firebase Todo App</h1>
+			<ng-view></ng-view>
 		</main>
 	</body>
 	<!-- AngularJS -->
@@ -58,5 +18,6 @@
 	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 	<!-- AngularFire -->
 	<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+	<script src="../node_modules/angular-route/angular-route.min.js"></script> 
 	<script src="js/app.min.js"></script>
 </html>
