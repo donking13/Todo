@@ -17,7 +17,7 @@ npm install
 # Usage
 
 ```bash
-gulp watch
+gulp
 ```
 
 
