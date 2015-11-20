@@ -45,17 +45,11 @@
 		myApp.controller('testController',function($scope,$firebaseArray,$firebaseAuth,$location,$rootScope,currentAuth,Auth){
 			var fRef = new Firebase('https://dontodo.firebaseio.com/todo');
 			$scope.data = $firebaseArray(fRef);
-
-			var uRef = new Firebase('https://dontodo.firebaseio.com/users');
-			$scope.userdata = $firebaseArray(uRef);
-
 			$scope.authObj = Auth;
 
 			$scope.authObj.$onAuth(function(authData){
-				console.log(authData);
 				$scope.useremail = authData.password.email;
 			});
-
 
 			$scope.addTodo = function(){
 				//create id
@@ -69,7 +63,6 @@
 				});
 				//clear todo
 				$scope.newTodo = '';
-				console.log($scope.authObj.authData);
 			}
 
 			$scope.remove = function(d){
@@ -103,8 +96,6 @@
 			$scope.logout = function(){
 				$scope.authObj.$unauth();
 				$location.path('/');
-				console.log($scope);
-
 				$scope.authObj.$onAuth(function(authData) {
 				  if (authData) {
 				    console.log("Logged in as------------:", authData.uid);
